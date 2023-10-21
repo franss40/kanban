@@ -3,12 +3,13 @@ import { AddIcon } from "@chakra-ui/icons"
 import PropTypes from "prop-types"
 import SubTask from "./SubTask"
 import { useState } from "react"
+import { nanoid } from "nanoid"
 
 const ListSubTask = ({ task, addSubTask }) => {
   const [title, setTitle] = useState("")
 
   function addNewSubTask() {
-    addSubTask(task.id, { title: title, completed: false })
+    addSubTask(task.id, { id: nanoid(), title: title, completed: false })
   }
 
   return (

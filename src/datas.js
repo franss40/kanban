@@ -1,14 +1,17 @@
 export const datos = [
   {
-    id: 1,
+    id: "1",
     title: "Mostrar Listado de tareas",
     text: "primero",
     priority: 5,
     state: "Requested",
-    subTasks: [{ title: "Nuevo Listado con CSS normal", completed: false }, { title: "otro Nuevo item", completed: false }],
+    subTasks: [
+      { id: "11", title: "Nuevo Listado con CSS normal", completed: false }, 
+      { id: "12", title: "otro Nuevo item", completed: false }
+    ],
   },
   {
-    id: 2,
+    id: "2",
     title: "Añadir tareas",
     text: "segundo",
     priority: 3,
@@ -16,7 +19,7 @@ export const datos = [
     subTasks: [],
   },
   {
-    id: 3,
+    id: "3",
     title: "Añadir Subtareas",
     text: "tercero",
     priority: 3,
@@ -24,7 +27,7 @@ export const datos = [
     subTasks: [],
   },
   {
-    id: 4,
+    id: "4",
     title: "Cambiar estado una tarea",
     text: "cuarto",
     priority: 4,
@@ -32,7 +35,7 @@ export const datos = [
     subTasks: [],
   },
   {
-    id: 5,
+    id: "5",
     title: "borrar una subtarea",
     text: "quinto",
     priority: 2,

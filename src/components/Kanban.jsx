@@ -13,6 +13,7 @@ import {
   Center,
 } from "@chakra-ui/react"
 import { useState } from "react"
+import { nanoid } from "nanoid"
 
 export default function Kanban() {
   const titulo = `{ ${titleProject.title} }`
@@ -24,7 +25,7 @@ export default function Kanban() {
     setdatas([
       ...datas,
       {
-        id: 6,
+        id: nanoid(),
         title: values.title,
         text: values.text,
         priority: values.priority,
