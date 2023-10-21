@@ -4,7 +4,7 @@ import { useState } from "react"
 import PropTypes from "prop-types"
 
 const AddTask = ({ onAddTask }) => {
-  const initialValue = { title: "", text: "", priority: "" }
+  const initialValue = { title: "", text: "", priority: "", hasError: false }
   const [values, setValues] = useState(initialValue)
 
   function handleAdd(event) {
@@ -13,9 +13,21 @@ const AddTask = ({ onAddTask }) => {
   }
 
   function handleClickAdd() {
-    if (values.priority > 5 || values.priority < 1 || !values.text || !values.title) return
+    if (
+      values.priority > 5 ||
+      values.priority < 1 ||
+      !values.text ||
+      !values.title
+    )
+      return
     setValues(initialValue)
     onAddTask(values)
+  }
+
+  function handleBlur() {
+    const priorityRegexp = new RegExp(/^[1-5]{1}$/)
+    const hasError = !priorityRegexp.test(values.priority)
+    setValues({ ...values, hasError: hasError })
   }
 
   return (
@@ -52,6 +64,7 @@ const AddTask = ({ onAddTask }) => {
           variant="filled"
           name="priority"
           onChange={handleAdd}
+          onBlur={handleBlur}
           value={values.priority}
         />
         <IconButton
@@ -62,6 +75,9 @@ const AddTask = ({ onAddTask }) => {
           onClick={handleClickAdd}
         />
       </HStack>
+      <Text mt={5} color="red" style={{ visibility: values.hasError ? "visible" : "hidden" }}>
+        Por favor, introduzca un valor de priority correcto
+      </Text>
     </Box>
   )
 }
