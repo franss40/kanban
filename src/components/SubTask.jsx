@@ -2,7 +2,7 @@ import { Text, SimpleGrid, Button, ButtonGroup, Box } from "@chakra-ui/react"
 import PropTypes from "prop-types"
 import { DeleteIcon, RepeatIcon } from "@chakra-ui/icons"
 
-const SubTask = ({ subTask }) => {
+const SubTask = ({ idTask, subTask, changeState }) => {
   if (!subTask) return
   return (
     <>
@@ -17,8 +17,8 @@ const SubTask = ({ subTask }) => {
             <Button leftIcon={<DeleteIcon />} colorScheme="blue">
               Borrar
             </Button>
-            <Button leftIcon={<RepeatIcon />} colorScheme="blue">
-              Estado
+            <Button leftIcon={<RepeatIcon />} colorScheme="blue" onClick={() => changeState(idTask, subTask.id)}>
+              {subTask.completed ? "Inactivo" : "activo"}
             </Button>
           </ButtonGroup>
         </Box>
@@ -28,7 +28,9 @@ const SubTask = ({ subTask }) => {
 }
 
 SubTask.propTypes = {
+  idTask: PropTypes.string,
   subTask: PropTypes.object.isRequired,
+  changeState: PropTypes.func.isRequired
 }
 
 export default SubTask

@@ -3,7 +3,7 @@ import { Box, ListItem, List, Text, Center } from "@chakra-ui/react"
 import Task from "./Task"
 import ListSubTask from "./ListSubTask"
 
-const ListTask = ({ datos, deleteTask, filterSearch, filterTask, changeState, addSubTask }) => {
+const ListTask = ({ datos, deleteTask, filterSearch, filterTask, changeState, addSubTask, setStateSubTask }) => {
 
   // filterTask: string (request, process, done, todos)
   function returnFilterDates(filterTask) {
@@ -52,7 +52,11 @@ const ListTask = ({ datos, deleteTask, filterSearch, filterTask, changeState, ad
     return (
       <ListItem key={task.id}>
         <Task task={task} changeState={changeState} deleteTask={deleteTask} />
-        <ListSubTask task={task} addSubTask={addSubTask} />
+        <ListSubTask
+          task={task}
+          addSubTask={addSubTask}
+          setStateSubTask={setStateSubTask}
+        />
       </ListItem>
     )
   })
@@ -82,7 +86,8 @@ ListTask.propTypes = {
   filterTask: PropTypes.string.isRequired,
   deleteTask: PropTypes.func.isRequired,
   changeState: PropTypes.func.isRequired,
-  addSubTask: PropTypes.func.isRequired
+  addSubTask: PropTypes.func.isRequired,
+  setStateSubTask: PropTypes.func.isRequired
 }
 
 export default ListTask

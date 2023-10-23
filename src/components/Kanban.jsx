@@ -21,6 +21,7 @@ export default function Kanban() {
   const [searchTask, setSearchTask] = useState("")
   const [filterTask, setFilterTask] = useState("Todos")
 
+  // Add Task
   function addTask(values) {
     setdatas([
       ...datas,
@@ -35,6 +36,7 @@ export default function Kanban() {
     ])
   }
 
+  // Cambiar el estado de un Task (Requested, In Process, Done)
   function changeState(id, newState) {
     let newItem
     const newDate = datas.map((item) => {
@@ -46,6 +48,7 @@ export default function Kanban() {
     setdatas(newDate)
   }
 
+  // Borrar task
   function deleteTask(id) {
     if (confirm("¿Quieres Borrar este registro con id " + id + "?")) {
       const newDatos = datas.filter((item) => item.id !== id)
@@ -53,6 +56,7 @@ export default function Kanban() {
     }
   }
 
+  // Add subTask
   function addSubTask(id, task) {
     const newData = datas.map(item => {
       if (item.id === id) {
@@ -62,6 +66,25 @@ export default function Kanban() {
       }
     })
     setdatas(newData)
+  }
+
+  // Cambiar estado de un subTask (Ttue, false)
+  function setStateSubTask(idTask, idSubTask) {
+    const newElement = datas.map(item => {
+      if (item.id === idTask) {
+        const subNewElement = item.subTasks.map(subItem => {
+          if (subItem.id === idSubTask) {
+            return {...subItem, completed: !subItem.completed}
+          } else {
+            return subItem
+          }          
+        })
+        return { ...item, subTasks: subNewElement }
+      } else {
+        return item
+      }
+    })
+    setdatas(newElement)
   }
 
   return (
@@ -95,6 +118,7 @@ export default function Kanban() {
         changeState={changeState}
         deleteTask={deleteTask}
         addSubTask= {addSubTask}
+        setStateSubTask= {setStateSubTask}
       />
     </Container>
   )
