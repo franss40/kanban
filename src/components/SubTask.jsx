@@ -4,11 +4,12 @@ import { DeleteIcon, RepeatIcon } from "@chakra-ui/icons"
 
 const SubTask = ({ idTask, subTask, changeState, deleteSubTask }) => {
   if (!subTask) return
+  const shapeText = subTask.completed ? "del" : "b"
   return (
     <>
       <SimpleGrid columns={2} spacing={1}>
         <Box p="4">
-          <Text as="b" color="green">
+          <Text as={shapeText} color="blue.400">
             {subTask.title}
           </Text>
         </Box>

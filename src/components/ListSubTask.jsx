@@ -27,7 +27,7 @@ const ListSubTask = ({ task, addSubTask, setStateSubTask, deleteSubTask }) => {
         />
         <IconButton
           onClick={addNewSubTask}
-          colorScheme="green"
+          colorScheme="red"
           aria-label="Add database"
           icon={<AddIcon />}
         />

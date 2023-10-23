@@ -39,8 +39,8 @@ const Task = ({ task, changeState, deleteTask }) => {
         <Box>
           <Select
             size="xs"
-            borderColor="blue"
-            color="blue.500"
+            borderColor="green"
+            color="yellow.500"
             defaultValue={state}
             onChange={onChangeState}
           >
