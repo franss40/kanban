@@ -68,7 +68,7 @@ export default function Kanban() {
     setdatas(newData)
   }
 
-  // Cambiar estado de un subTask (Ttue, false)
+  // Cambiar estado de un subTask (True, false)
   function setStateSubTask(idTask, idSubTask) {
     const newElement = datas.map(item => {
       if (item.id === idTask) {
@@ -85,6 +85,21 @@ export default function Kanban() {
       }
     })
     setdatas(newElement)
+  }
+
+  //Borrar subTask
+  function deleteSubTask(idTask, idSubTask) {
+    if (confirm("¿Quieres Borrar este registro con idSubTask " + idSubTask + "?")) {
+      const newElement = datas.map((item) => {
+        if (item.id === idTask) {
+          const subNewElement = item.subTasks.filter(subItem => subItem.id !== idSubTask)
+          return {...item, subTasks: subNewElement }
+        } else {
+          return item
+        }
+      })
+      setdatas(newElement)
+    }
   }
 
   return (
@@ -117,8 +132,9 @@ export default function Kanban() {
         filterTask={filterTask}
         changeState={changeState}
         deleteTask={deleteTask}
-        addSubTask= {addSubTask}
-        setStateSubTask= {setStateSubTask}
+        addSubTask={addSubTask}
+        setStateSubTask={setStateSubTask}
+        deleteSubTask={deleteSubTask}
       />
     </Container>
   )

@@ -5,7 +5,7 @@ import SubTask from "./SubTask"
 import { useState } from "react"
 import { nanoid } from "nanoid"
 
-const ListSubTask = ({ task, addSubTask, setStateSubTask }) => {
+const ListSubTask = ({ task, addSubTask, setStateSubTask, deleteSubTask }) => {
   const [title, setTitle] = useState("")
 
   function addNewSubTask() {
@@ -37,7 +37,12 @@ const ListSubTask = ({ task, addSubTask, setStateSubTask }) => {
         task.subTasks.map((subTask) => {
           return (
             <List spacing={3} ml={2} key={`${subTask.title}-${task.id}`}>
-              <SubTask idTask={task.id} subTask={subTask} changeState={setStateSubTask} />
+              <SubTask
+                idTask={task.id}
+                subTask={subTask}
+                changeState={setStateSubTask}
+                deleteSubTask={deleteSubTask}
+              />
               <Divider />
             </List>
           )
@@ -49,7 +54,8 @@ const ListSubTask = ({ task, addSubTask, setStateSubTask }) => {
 ListSubTask.propTypes = {
   task: PropTypes.object,
   addSubTask: PropTypes.func.isRequired,
-  setStateSubTask: PropTypes.func.isRequired
+  setStateSubTask: PropTypes.func.isRequired,
+  deleteSubTask: PropTypes.func.isRequired
 }
 
 export default ListSubTask

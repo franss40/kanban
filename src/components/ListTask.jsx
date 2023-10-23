@@ -3,14 +3,22 @@ import { Box, ListItem, List, Text, Center } from "@chakra-ui/react"
 import Task from "./Task"
 import ListSubTask from "./ListSubTask"
 
-const ListTask = ({ datos, deleteTask, filterSearch, filterTask, changeState, addSubTask, setStateSubTask }) => {
-
+const ListTask = ({
+  datos,
+  deleteTask,
+  filterSearch,
+  filterTask,
+  changeState,
+  addSubTask,
+  setStateSubTask,
+  deleteSubTask,
+}) => {
   // filterTask: string (request, process, done, todos)
   function returnFilterDates(filterTask) {
     let returnDatas = []
-    const posibleDatas = ['Requested', 'In Process', 'Done']
+    const posibleDatas = ["Requested", "In Process", "Done"]
     if (posibleDatas.includes(filterTask)) {
-      datos.forEach(item => {
+      datos.forEach((item) => {
         if (item.state === filterTask) returnDatas.push(item)
       })
     } else {
@@ -47,7 +55,7 @@ const ListTask = ({ datos, deleteTask, filterSearch, filterTask, changeState, ad
       </Box>
     )
   }
-  
+
   const listItems = filterDatas.map((task) => {
     return (
       <ListItem key={task.id}>
@@ -56,6 +64,7 @@ const ListTask = ({ datos, deleteTask, filterSearch, filterTask, changeState, ad
           task={task}
           addSubTask={addSubTask}
           setStateSubTask={setStateSubTask}
+          deleteSubTask={deleteSubTask}
         />
       </ListItem>
     )
@@ -71,7 +80,9 @@ const ListTask = ({ datos, deleteTask, filterSearch, filterTask, changeState, ad
       w="100%"
     >
       <Center>
-        <Box as="b" m={8} color="blue.300">{filterDatas.length} Items</Box>
+        <Box as="b" m={8} color="blue.300">
+          {filterDatas.length} Items
+        </Box>
       </Center>
       <List spacing={3} ml={2}>
         {listItems}
@@ -87,7 +98,8 @@ ListTask.propTypes = {
   deleteTask: PropTypes.func.isRequired,
   changeState: PropTypes.func.isRequired,
   addSubTask: PropTypes.func.isRequired,
-  setStateSubTask: PropTypes.func.isRequired
+  setStateSubTask: PropTypes.func.isRequired,
+  deleteSubTask: PropTypes.func.isRequired
 }
 
 export default ListTask
