@@ -13,6 +13,7 @@ import { DeleteIcon, InfoIcon } from "@chakra-ui/icons"
 import { StarIcon } from "@chakra-ui/icons"
 
 const Task = ({ task, changeState, deleteTask }) => {
+
   const state = task.state
 
   function onChangeState(e) {
@@ -49,7 +50,7 @@ const Task = ({ task, changeState, deleteTask }) => {
             <option value="Done">Done</option>
           </Select>
         </Box>
-        <Button leftIcon={<DeleteIcon />} colorScheme="red" size="sm" onClick={() => deleteTask(task.id)}>
+        <Button leftIcon={<DeleteIcon />} colorScheme="red" size="sm" onClick={ () => deleteTask(task.id) }>
           Eliminar
         </Button>
       </HStack>

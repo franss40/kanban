@@ -18,8 +18,9 @@ const AddTask = ({ onAddTask }) => {
       values.priority < 1 ||
       !values.text ||
       !values.title
-    )
+    ) {
       return
+    }
     setValues(initialValue)
     onAddTask(values)
   }
@@ -75,7 +76,11 @@ const AddTask = ({ onAddTask }) => {
           onClick={handleClickAdd}
         />
       </HStack>
-      <Text mt={5} color="red" style={{ visibility: values.hasError ? "visible" : "hidden" }}>
+      <Text
+        mt={5}
+        color="red"
+        style={{ visibility: values.hasError ? "visible" : "hidden" }}
+      >
         Por favor, introduzca un valor de priority correcto
       </Text>
     </Box>
