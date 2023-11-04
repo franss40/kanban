@@ -6,7 +6,6 @@ import ListTask from "./ListTask"
 import { useState } from "react"
 import { returnFilterDatas, returnSearchDatas } from "./utils.js"
 import useKanbanStore from "../store/kanbanStore.js"
-import { kanbanContext } from "./kanbanContext";
 import {
   Box,
   Container,
@@ -18,29 +17,17 @@ import {
 } from "@chakra-ui/react"
 
 export default function Kanban() {
-  
   const [searchTask, setSearchTask] = useState("")
   const [filterTask, setFilterTask] = useState("Todos")
   const titulo = `{ ${titleProject.title} }`
 
-  const {data, addTask, changeState, deleteTask, addSubTask, setStateSubTask, deleteSubTask} = useKanbanStore(state => state)
+  const {data, addTask} = useKanbanStore(state => state)
   
   // Calculamos los datos filtrados
   let datas = returnFilterDatas(data, filterTask)
   datas = returnSearchDatas(datas, searchTask)
 
   return (
-    <kanbanContext.Provider
-      value={{
-        datas,
-        addTask,
-        changeState,
-        deleteTask,
-        addSubTask,
-        setStateSubTask,
-        deleteSubTask,
-      }}
-    >
       <Container
         centerContent
         maxW="container.xl"
@@ -63,8 +50,7 @@ export default function Kanban() {
         <Busqueda filterSearch={searchTask} onFilterSearch={setSearchTask} />
         <AddTask onAddTask={addTask} />
         <Filtrar filterTask={filterTask} setFilterTask={setFilterTask} />
-        <ListTask />
+        <ListTask datas={datas} />
       </Container>
-    </kanbanContext.Provider>
   )
 }

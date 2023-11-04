@@ -71,7 +71,7 @@ const useKanbanStore = create((set, get) => ({
         return item
       }
     })
-    return set({ newElement })
+    return set({ data: newElement })
   },
 
   //Borrar subTask
@@ -87,7 +87,7 @@ const useKanbanStore = create((set, get) => ({
         return item
       }
     })
-    return set({ newElement })
+    return set({ data: newElement })
   },
 }))
 

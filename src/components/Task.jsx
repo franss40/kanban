@@ -1,4 +1,6 @@
 import PropTypes from "prop-types"
+import useKanbanStore from "../store/kanbanStore"
+
 import {
   Box,
   Text,
@@ -12,13 +14,20 @@ import {
 import { DeleteIcon, InfoIcon } from "@chakra-ui/icons"
 import { StarIcon } from "@chakra-ui/icons"
 
-const Task = ({ task, changeState, deleteTask }) => {
+const Task = ({ task }) => {
 
+  const { changeState, deleteTask } = useKanbanStore()
   const state = task.state
 
   function onChangeState(e) {
     const newValue = e.target.value
     changeState(task.id, newValue)
+  }
+
+  function deleteT() {
+    if (confirm("Deseas borrar este registro: \n\r" + task.title)) {
+      deleteTask(task.id)
+    }
   }
 
   return (
@@ -50,7 +59,7 @@ const Task = ({ task, changeState, deleteTask }) => {
             <option value="Done">Done</option>
           </Select>
         </Box>
-        <Button leftIcon={<DeleteIcon />} colorScheme="red" size="sm" onClick={ () => deleteTask(task.id) }>
+        <Button leftIcon={<DeleteIcon />} colorScheme="red" size="sm" onClick={ deleteT }>
           Eliminar
         </Button>
       </HStack>
@@ -61,9 +70,7 @@ const Task = ({ task, changeState, deleteTask }) => {
 }
 
 Task.propTypes = {
-  task: PropTypes.object.isRequired,
-  changeState: PropTypes.func.isRequired,
-  deleteTask: PropTypes.func.isRequired
+  task: PropTypes.object.isRequired
 }
 
 export default Task

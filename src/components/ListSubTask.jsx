@@ -4,9 +4,12 @@ import PropTypes from "prop-types"
 import SubTask from "./SubTask"
 import { useState } from "react"
 import { nanoid } from "nanoid"
+import useKanbanStore from "../store/kanbanStore"
 
-const ListSubTask = ({ task, addSubTask, setStateSubTask, deleteSubTask }) => {
+const ListSubTask = ({ task }) => {
   const [title, setTitle] = useState("")
+
+  const addSubTask = useKanbanStore(state => state.addSubTask)
 
   function addNewSubTask() {
     setTitle("")
@@ -40,8 +43,6 @@ const ListSubTask = ({ task, addSubTask, setStateSubTask, deleteSubTask }) => {
               <SubTask
                 idTask={task.id}
                 subTask={subTask}
-                changeState={setStateSubTask}
-                deleteSubTask={deleteSubTask}
               />
               <Divider />
             </List>
@@ -52,10 +53,7 @@ const ListSubTask = ({ task, addSubTask, setStateSubTask, deleteSubTask }) => {
 }
 
 ListSubTask.propTypes = {
-  task: PropTypes.object,
-  addSubTask: PropTypes.func.isRequired,
-  setStateSubTask: PropTypes.func.isRequired,
-  deleteSubTask: PropTypes.func.isRequired
+  task: PropTypes.object
 }
 
 export default ListSubTask
