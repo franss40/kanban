@@ -3,7 +3,8 @@ import Busqueda from "./Busqueda"
 import AddTask from "./AddTask"
 import Filtrar from "./Filtrar"
 import ListTask from "./ListTask"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
 import { returnFilterDatas, returnSearchDatas } from "./utils.js"
 import useKanbanStore from "../store/kanbanStore.js"
 import {
@@ -21,11 +22,17 @@ export default function Kanban() {
   const [filterTask, setFilterTask] = useState("Todos")
   const titulo = `{ ${titleProject.title} }`
 
-  const {data, addTask} = useKanbanStore(state => state)
+  const {data, setDatas, addTask} = useKanbanStore()
   
   // Calculamos los datos filtrados
   let datas = returnFilterDatas(data, filterTask)
   datas = returnSearchDatas(datas, searchTask)
+
+  useEffect (() => {
+    axios.get('http://localhost:3000/tareas')
+      .then(response => setDatas(response.data))
+  }, [])
+  
 
   return (
       <Container

@@ -1,9 +1,13 @@
 import { create } from "zustand"
-import { datos } from "../datas.js"
 import { nanoid } from "nanoid"
 
 const useKanbanStore = create((set, get) => ({
-  data: datos,
+  data: [],
+
+  // Inicializar datos
+  setDatas: (values) => {    
+      return set({ data: values })
+  },
 
   // Add Task
   addTask: (values) =>
